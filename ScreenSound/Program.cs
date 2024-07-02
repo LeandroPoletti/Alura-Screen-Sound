@@ -1,7 +1,25 @@
 ﻿using ScreenSound.Menus;
 using ScreenSound.Modelos;
+using ScreenSound.Banco;
+using Npgsql;
 
-Artista ira = new Artista("Ira!", "Banda Ira!");
+Artista ira = new Artista("Ira!", "Banda Ira!") {FotoPerfil = "https://img.freepik.com/vetores-gratis/silhueta-feminina_23-2147524227.jpg"};
+
+await ArtistaDAL.IncluirArtista(ira);
+
+var resultado = await ArtistaDAL.ListarMusicos();
+
+//var lista = resultado.Result; se usar o await la em cima não precisa
+// similar a promise de js?
+
+foreach (var teste in resultado)
+{
+    Console.WriteLine(teste);
+}
+
+
+
+
 Artista beatles = new("The Beatles", "Banda The Beatles");
 
 Dictionary<string, Artista> artistasRegistrados = new();
